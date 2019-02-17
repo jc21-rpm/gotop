@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 
 %global gh_user     cjbassi
-%global gh_commit   be57ff76b9f567b697c39a78115a02b3917b1fea
+%global gh_commit   0ed7e58984292c9a2c08717d7c0fcd2f61e232a1
 %global gh_short    %(c=%{gh_commit}; echo ${c:0:7})
 
 # see https://fedoraproject.org/wiki/PackagingDrafts/Go#Build_ID
@@ -11,7 +11,7 @@
 %endif
 
 Name:           gotop
-Version:        2.0.1
+Version:        2.0.2
 Release:        1%{?dist}
 Summary:        Another terminal based graphical activity monitor, inspired by gtop and vtop, this time written in Go!
 Group:          Applications/System
@@ -47,6 +47,9 @@ install -Dm0755 %{_builddir}/bin/%{name} %{buildroot}%{_bindir}/%{name}
 %doc %{name}-%{version}/LICENSE %{name}-%{version}/*.md
 
 %changelog
+* Sun Feb 17 2019 Jamie Curnow <jc@jc21.com> 2.0.2-1
+- V2.0.2
+
 * Thu Feb 7 2019 Jamie Curnow <jc@jc21.com> 2.0.1-1
 - V2.0.1
 
