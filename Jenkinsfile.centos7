@@ -17,13 +17,15 @@ pipeline {
     stage('Build') {
       steps {
         ansiColor('xterm') {
-          sh './build 7'
+          sh './build 7 golang'
         }
       }
     }
     stage('Sign') {
       steps {
-        rpmSign()
+        ansiColor('xterm') {
+          rpmSign()
+        }
       }
     }
     stage('Publish') {
@@ -31,7 +33,6 @@ pipeline {
         dir(path: 'RPMS') {
           archiveArtifacts(artifacts: '**/*/*.rpm', caseSensitive: true, onlyIfSuccessful: true)
         }
-
         dir(path: 'SRPMS') {
           archiveArtifacts(artifacts: '**/*.src.rpm', caseSensitive: true, onlyIfSuccessful: true, allowEmptyArchive: true)
         }
