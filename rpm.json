@@ -1,0 +1,7 @@
+{
+  "publish": {
+    "PACKAGE": "gotop",
+    "GH_USER": "jc21-rpm",
+    "VERSION": "3.0.0"
+  }
+}
