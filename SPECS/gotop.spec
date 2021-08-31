@@ -17,6 +17,7 @@ Summary:        Another terminal based graphical activity monitor, inspired by g
 Group:          Applications/System
 License:        MIT
 URL:            https://github.com/%{gh_user}/%{name}
+Source:         https://github.com/%{gh_user}/%{name}/archive/%{version}.tar.gz
 BuildRequires:  git golang
 
 %description
@@ -24,19 +25,10 @@ Another terminal based graphical activity monitor, inspired by gtop and vtop, th
 See the project site for configuration options: https://github.com/cjbassi/gotop
 
 %prep
-wget https://github.com/%{gh_user}/%{name}/archive/%{version}.tar.gz
-tar xzf %{version}.tar.gz
-mkdir -p %{_builddir}/src/github.com/%{gh_user}/
-cd %{_builddir}/src/github.com/%{gh_user}/
-ln -snf %{_builddir}/%{name}-%{version} %{name}
-cd %{name}
+%setup -q -n %{name}-%{version}
 
 %build
-export GOPATH="%{_builddir}"
-export PATH=$PATH:"%{_builddir}"/bin
-cd %{_builddir}/src/github.com/%{gh_user}/%{name}
 export LDFLAGS="${LDFLAGS} -X main.commit=%{gh_short} -X main.date=$(date -u +%Y%m%d.%H%M%%S) -X main.version=%{version}"
-
 %gobuild -o %{_builddir}/bin/%{name}
 
 %install
@@ -44,7 +36,7 @@ install -Dm0755 %{_builddir}/bin/%{name} %{buildroot}%{_bindir}/%{name}
 
 %files
 %{_bindir}/%{name}
-%doc %{name}-%{version}/LICENSE %{name}-%{version}/*.md
+%doc LICENSE *.md
 
 %changelog
 * Mon Feb 25 2019 Jamie Curnow <jc@jc21.com> 3.0.0-1
