@@ -12,7 +12,7 @@
 
 Name:           gotop
 Version:        3.0.0
-Release:        1
+Release:        1%{?dist}
 Summary:        Another terminal based graphical activity monitor, inspired by gtop and vtop, this time written in Go!
 Group:          Applications/System
 License:        MIT
