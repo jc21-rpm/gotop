@@ -6,9 +6,6 @@
 
 # see https://fedoraproject.org/wiki/PackagingDrafts/Go#Build_ID
 %global _dwz_low_mem_die_limit 0
-%if ! 0%{?gobuild:1}
-%define gobuild(o:) go build -ldflags "${LDFLAGS:-} -B 0x$(head -c20 /dev/urandom|od -An -tx1|tr -d ' \\n') " -i -v -x %{?**};
-%endif
 
 Name:           gotop
 Version:        3.0.0
@@ -29,7 +26,7 @@ See the project site for configuration options: https://github.com/cjbassi/gotop
 
 %build
 export LDFLAGS="${LDFLAGS} -X main.commit=%{gh_short} -X main.date=$(date -u +%Y%m%d.%H%M%%S) -X main.version=%{version}"
-%gobuild -o %{_builddir}/bin/%{name}
+go build -o %{_builddir}/bin/%{name}
 
 %install
 install -Dm0755 %{_builddir}/bin/%{name} %{buildroot}%{_bindir}/%{name}
